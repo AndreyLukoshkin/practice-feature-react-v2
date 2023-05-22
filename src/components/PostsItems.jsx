@@ -1,20 +1,28 @@
-import React, { useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import Loader from '../UI/loader/Loader'
 import PostItem from './PostItem'
 import PostForm from './PostForm'
 import PostFilter from './PostFilter'
 import MyModal from '../UI/modal/MyModal'
 import MyButton from '../UI/button/MyButton'
+import { usePosts } from '../hooks/usePost'
+import PostService from '../API/PostService'
+import { useFetching } from '../hooks/useFetching'
 
 const PostsItems = () => {
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: 'JavaScript',
-      body: 'Description',
-    },
-  ])
+  const [posts, setPosts] = useState([])
   const [filter, setFilter] = useState({ sort: '', query: '' })
   const [modal, setModal] = useState(false)
+  const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query) // custom hook
+  const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
+    // custom hook
+    const posts = await PostService.getAll()
+    setPosts(posts)
+  })
+
+  useEffect(() => {
+    fetchPosts()
+  }, [])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -24,22 +32,6 @@ const PostsItems = () => {
   const deletePost = (post) => {
     setPosts(posts.filter((p) => p.id !== post.id))
   }
-
-  const sortedPosts = useMemo(() => {
-    console.log('ОТРАБОТАЛА ФУНКЦИЯ СОРТИРОВКИ')
-    if (filter.sort) {
-      return [...posts].sort((a, b) =>
-        a[filter.sort].localeCompare(b[filter.sort])
-      )
-    }
-    return posts
-  }, [filter.sort, posts])
-
-  const sortedAndSearchedPosts = useMemo(() => {
-    return sortedPosts.filter((post) =>
-      post.title.toLowerCase().includes(filter.query.toLowerCase())
-    )
-  }, [filter.query, sortedPosts])
 
   return (
     <div>
@@ -51,11 +43,25 @@ const PostsItems = () => {
       </MyModal>
       <hr color="teal" size="1" style={{ margin: '15px 0' }} />
       <PostFilter filter={filter} setFilter={setFilter} />
-      <PostItem
-        deletePost={deletePost}
-        posts={sortedAndSearchedPosts}
-        title="List"
-      />
+      <hr color="teal" size="1" style={{ margin: '15px 0', width: '75%' }} />
+      {postError && <h1>{postError}</h1>}
+      {isPostLoading ? (
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            margin: '50px 0',
+          }}
+        >
+          <Loader />
+        </div>
+      ) : (
+        <PostItem
+          deletePost={deletePost}
+          posts={sortedAndSearchedPosts}
+          title="List"
+        />
+      )}
     </div>
   )
 }
