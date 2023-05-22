@@ -1,7 +1,13 @@
 import './App.css'
+import React from 'react'
+import PostsItems from './components/PostsItems'
 
 function App() {
-  return <h1>a little bit practice</h1>
+  return (
+    <div className="App">
+      <PostsItems />
+    </div>
+  )
 }
 
 export default App
