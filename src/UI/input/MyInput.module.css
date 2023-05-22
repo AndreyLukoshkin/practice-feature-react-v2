@@ -1,0 +1,12 @@
+.myInp {
+  display: block;
+  width: 100%;
+  margin: 10px auto;
+  padding: 10px 10px;
+  border: 1px solid teal;
+  border-radius: 3px;
+}
+
+.myInp:first-child {
+  margin-top: 50px;
+}

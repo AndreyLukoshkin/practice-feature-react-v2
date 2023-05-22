@@ -1,0 +1,11 @@
+.selectContainer {
+  display: block;
+}
+
+.select {
+  display: block;
+  width: 25%;
+  padding: 5px 10px;
+  border: 1px solid teal;
+  border-radius: 3px;
+}
