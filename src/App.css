@@ -54,13 +54,15 @@
 }
 
 .btnPost:hover,
-.page__number:hover {
+.page__number:hover,
+.btnPages:hover {
   transition: 0.5s;
   background-color: rgb(178, 235, 235);
   box-shadow: 0px 0px 2px 0px teal;
 }
 .btnPost:active,
-.page__number:active {
+.page__number:active,
+.btnPages:active {
   background-color: rgb(86, 217, 217);
   box-shadow: 0px 0px 2px 0px teal;
 }
@@ -81,9 +83,10 @@
 }
 
 .page__container {
+  margin-bottom: 50px;
   display: flex;
-  flex-direction: row;
   justify-content: center;
+  align-items: center;
 }
 
 .page__number {
@@ -91,7 +94,7 @@
   border: 1px solid teal;
   width: 30px;
   height: 30px;
-  margin: 0 3px 30px 3px;
+  margin: 0 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -101,7 +104,7 @@
 .page__current {
   width: 30px;
   height: 30px;
-  margin: 0 3px 30px 3px;
+  margin: 0 3px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -110,4 +113,27 @@
   background-color: teal;
   color: white;
   box-shadow: 0px 0px 2px 0px teal;
+}
+
+.inputPages {
+  border: 1px solid teal;
+  border-radius: 3px;
+  padding: 6px 10px;
+  margin: 5px;
+}
+
+.inputPages:focus {
+  box-shadow: 0px 0px 2px 0px rgb(43, 37, 211);
+  border: 1px solid rgb(43, 37, 211);
+  outline: 0;
+}
+
+.btnPages {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  cursor: pointer;
+  color: teal;
+  border: 1px solid teal;
+  border-radius: 3px;
 }

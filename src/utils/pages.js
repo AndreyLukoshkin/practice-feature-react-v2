@@ -21,18 +21,16 @@ export const usePagination = (totalPages, page) => {
     }
 
     if (page - 5 > 0) {
-      console.log(paginationResult)
       return [
         1,
         '...',
-        ...paginationResult.slice(page - 3, page + 2),
+        ...paginationResult.slice(Number(page) - 3, Number(page) + 2),
         '...',
         totalPages,
       ]
-    } else {
-      let ind = paginationResult.indexOf('...')
-      paginationResult.splice(ind, 1)
     }
+
+    return paginationResult
   }, [totalPages, page])
 
   return result
