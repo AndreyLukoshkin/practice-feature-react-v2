@@ -77,7 +77,12 @@ const PostsItems = () => {
           title="List"
         />
       )}
-      <Pagination totalPages={totalPages} changePage={changePage} page={page} />
+      <Pagination
+        setPage={setPage}
+        totalPages={totalPages}
+        changePage={changePage}
+        page={page}
+      />
     </div>
   )
 }
