@@ -53,12 +53,14 @@
   border-radius: 3px;
 }
 
-.btnPost:hover {
+.btnPost:hover,
+.page__number:hover {
   transition: 0.5s;
   background-color: rgb(178, 235, 235);
   box-shadow: 0px 0px 2px 0px teal;
 }
-.btnPost:active {
+.btnPost:active,
+.page__number:active {
   background-color: rgb(86, 217, 217);
   box-shadow: 0px 0px 2px 0px teal;
 }
@@ -76,4 +78,36 @@
 .post-exit-active {
   opacity: 0;
   transition: all 200ms ease-in;
+}
+
+.page__container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.page__number {
+  cursor: pointer;
+  border: 1px solid teal;
+  width: 30px;
+  height: 30px;
+  margin: 0 3px 30px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: teal;
+}
+
+.page__current {
+  width: 30px;
+  height: 30px;
+  margin: 0 3px 30px 3px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  font-weight: bold;
+  background-color: teal;
+  color: white;
+  box-shadow: 0px 0px 2px 0px teal;
 }

@@ -8,21 +8,36 @@ import MyButton from '../UI/button/MyButton'
 import { usePosts } from '../hooks/usePost'
 import PostService from '../API/PostService'
 import { useFetching } from '../hooks/useFetching'
+import { getPageCount } from '../utils/pages'
+import Pagination from '../UI/pagination/Pagination'
 
 const PostsItems = () => {
   const [posts, setPosts] = useState([])
-  const [filter, setFilter] = useState({ sort: '', query: '' })
   const [modal, setModal] = useState(false)
+
+  const [filter, setFilter] = useState({ sort: '', query: '' })
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query) // custom hook
+
+  const [totalPages, setTotalPages] = useState(0)
+  const [limit, setLimit] = useState(5)
+  const [page, setPage] = useState(1)
+
+  const changePage = (page) => {
+    if (page === '...') return
+    setPage(page)
+  }
+
   const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
     // custom hook
-    const posts = await PostService.getAll()
-    setPosts(posts)
+    const response = await PostService.getAll(limit, page)
+    setPosts(response.data)
+    const totalCount = response.headers['x-total-count']
+    setTotalPages(getPageCount(totalCount, limit))
   })
 
   useEffect(() => {
     fetchPosts()
-  }, [])
+  }, [page])
 
   const createPost = (newPost) => {
     setPosts([...posts, newPost])
@@ -62,6 +77,7 @@ const PostsItems = () => {
           title="List"
         />
       )}
+      <Pagination totalPages={totalPages} changePage={changePage} page={page} />
     </div>
   )
 }
