@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Loader from '../UI/loader/Loader'
 import PostItem from '../components/PostItem'
 import PostForm from '../components/PostForm'
@@ -14,6 +14,10 @@ import Pagination from '../UI/pagination/Pagination'
 const Posts = () => {
   const [posts, setPosts] = useState([])
   const [modal, setModal] = useState(false)
+  const lastElement = useRef()
+  const observer = useRef()
+
+  console.log(lastElement)
 
   const [filter, setFilter] = useState({ sort: '', query: '' })
   const sortedAndSearchedPosts = usePosts(posts, filter.sort, filter.query) // custom hook
@@ -30,10 +34,18 @@ const Posts = () => {
   const [fetchPosts, isPostLoading, postError] = useFetching(async () => {
     // custom hook
     const response = await PostService.getAll(limit, page)
-    setPosts(response.data)
+    setPosts([...posts, ...response.data]) // помещаем данные в конец страницы для бесконечной ленты
     const totalCount = response.headers['x-total-count']
     setTotalPages(getPageCount(totalCount, limit))
   })
+
+  useEffect(() => {
+    var callback = function (entries, observer) {
+      console.log('DIV В ЗОНЕ ВИДИМОСТИ')
+    }
+    observer.current = new IntersectionObserver(callback) // новый интерсекншобзервер помещаем в поле карент этого рефа
+    observer.current.observe(lastElement.current) // указываем за каким элементом будем наблюдать
+  }, [])
 
   useEffect(() => {
     fetchPosts()
@@ -60,7 +72,16 @@ const Posts = () => {
       <PostFilter filter={filter} setFilter={setFilter} />
       <hr color="teal" size="1" style={{ margin: '15px 0', width: '75%' }} />
       {postError && <h1>{postError}</h1>}
-      {isPostLoading ? (
+      <PostItem
+        deletePost={deletePost}
+        posts={sortedAndSearchedPosts}
+        title="List"
+      />
+      <div
+        ref={lastElement}
+        style={{ height: '20px', background: 'red' }}
+      ></div>
+      {isPostLoading && (
         <div
           style={{
             display: 'flex',
@@ -70,12 +91,6 @@ const Posts = () => {
         >
           <Loader />
         </div>
-      ) : (
-        <PostItem
-          deletePost={deletePost}
-          posts={sortedAndSearchedPosts}
-          title="List"
-        />
       )}
       <Pagination
         setPage={setPage}
