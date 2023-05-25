@@ -8,7 +8,6 @@ const PostId = () => {
   const params = useParams()
   const [postId, setPostId] = useState('')
   const [comments, setComments] = useState([])
-  console.log(comments)
 
   const [fetchPostById, isLoading, error] = useFetching(async (id) => {
     const response = await PostService.getById(id)
