@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from 'react'
 import Loader from '../UI/loader/Loader'
-import PostItem from './PostItem'
-import PostForm from './PostForm'
-import PostFilter from './PostFilter'
+import PostItem from '../components/PostItem'
+import PostForm from '../components/PostForm'
+import PostFilter from '../components/PostFilter'
 import MyModal from '../UI/modal/MyModal'
 import MyButton from '../UI/button/MyButton'
 import { usePosts } from '../hooks/usePost'
 import PostService from '../API/PostService'
 import { useFetching } from '../hooks/useFetching'
-import { getPageCount } from '../utils/pages'
+import { getPageCount } from '../utils/getPageCount'
 import Pagination from '../UI/pagination/Pagination'
 
-const PostsItems = () => {
+const Posts = () => {
   const [posts, setPosts] = useState([])
   const [modal, setModal] = useState(false)
 
@@ -87,4 +87,4 @@ const PostsItems = () => {
   )
 }
 
-export default PostsItems
+export default Posts

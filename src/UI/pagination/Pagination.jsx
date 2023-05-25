@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { usePagination } from '../../utils/pages'
+import { usePagination } from '../../hooks/usePagination'
 
 const Pagination = ({ totalPages, changePage, page, setPage }) => {
   let pagesArray = usePagination(totalPages, page)
