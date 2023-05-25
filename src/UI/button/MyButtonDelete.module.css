@@ -1,0 +1,24 @@
+.myBtnDelete {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  width: 60px;
+  height: 30px;
+  color: teal;
+  background-color: white;
+  padding: 5px 10px;
+  border: 1px solid teal;
+  border-radius: 3px;
+  margin: 5px 0;
+}
+
+.myBtnDelete:hover {
+  transition: 0.5s;
+  background-color: rgb(178, 235, 235);
+  color: black;
+  box-shadow: 0px 0px 2px 0px teal;
+}
+.myBtnDelete:active {
+  background-color: rgb(86, 217, 217);
+  box-shadow: 0px 0px 2px 0px teal;
+}

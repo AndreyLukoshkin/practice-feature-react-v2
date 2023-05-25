@@ -1,9 +1,5 @@
 import { useMemo } from 'react'
 
-export const getPageCount = (totalCount, limit) => {
-  return Math.ceil(totalCount / limit)
-}
-
 export const usePagination = (totalPages, page) => {
   const result = useMemo(() => {
     const paginationResult = []
@@ -12,6 +8,8 @@ export const usePagination = (totalPages, page) => {
     for (let i = 0; i < totalPages; i++) {
       paginationResult.push(i + 1)
     }
+
+    if (totalPages <= 9) return paginationResult
 
     if (page < 6)
       return [...paginationResult.slice(0, visible), '...', totalPages]

@@ -1,12 +1,17 @@
 import './App.css'
 import React from 'react'
-import PostsItems from './components/PostsItems'
+import AppRouter from './components/AppRouter'
+import Navbar from './UI/navbar/Navbar'
+import { BrowserRouter } from 'react-router-dom'
 
 function App() {
   return (
-    <div className="App">
-      <PostsItems />
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Navbar />
+        <AppRouter />
+      </div>
+    </BrowserRouter>
   )
 }
 
