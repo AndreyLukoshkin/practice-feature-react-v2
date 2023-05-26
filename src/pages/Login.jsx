@@ -15,7 +15,6 @@ const Login = () => {
     e.preventDefault()
     registeredUsers.map((user) => {
       if (user.login === valueLogin && user.password == valuePassword) {
-        localStorage.setItem('auth', 'true')
         setIsAuth(true)
         navigate('postsobserver')
       } else {
