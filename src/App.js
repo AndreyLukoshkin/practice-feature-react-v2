@@ -8,6 +8,12 @@ import { BrowserRouter } from 'react-router-dom'
 function App() {
   const [isAuth, setIsAuth] = useState(false)
 
+  useEffect(() => {
+    if (localStorage.getItem('auth')) {
+      setIsAuth(true)
+    }
+  }, [])
+
   return (
     <AuthContext.Provider
       value={{
