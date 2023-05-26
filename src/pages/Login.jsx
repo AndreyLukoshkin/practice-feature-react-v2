@@ -17,7 +17,7 @@ const Login = () => {
       if (user.login === valueLogin && user.password == valuePassword) {
         localStorage.setItem('auth', 'true')
         setIsAuth(true)
-        navigate('posts')
+        navigate('postsobserver')
       } else {
         setIsAuth(false)
       }
