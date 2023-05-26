@@ -17,8 +17,11 @@ const Navbar = () => {
         <Link to="about" className="link">
           About
         </Link>
-        <Link to="posts" className="link">
-          Posts
+        <Link to="postsobserver" className="link">
+          PostsObserver
+        </Link>
+        <Link to="postspagination" className="link">
+          PostsPagination
         </Link>
         <Link to="login" className="link">
           Login

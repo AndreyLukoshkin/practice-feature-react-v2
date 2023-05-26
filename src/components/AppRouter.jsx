@@ -1,4 +1,5 @@
-import Posts from '../pages/Posts'
+import PostsObserver from '../pages/PostsObserver'
+import PostsPagination from '../pages/PostsPagination'
 import PostId from '../pages/PostId'
 import About from '../pages/About'
 import NotFound from '../pages/NotFound'
@@ -16,9 +17,11 @@ const AppRouter = () => {
       {isAuth ? (
         <Routes>
           <Route path="/about" element={<About />} />
-          <Route path="/" element={<Posts />} />
-          <Route path="/posts" element={<Posts />} />
-          <Route path="/posts/:id" element={<PostId />} />
+          <Route path="/" element={<PostsObserver />} />
+          <Route path="/postsobserver" element={<PostsObserver />} />
+          <Route path="/postsobserver/:id" element={<PostId />} />
+          <Route path="/postspagination" element={<PostsPagination />} />
+          <Route path="/postspagination/:id" element={<PostId />} />
           <Route path="*" element={<NotFound />} />
           <Route path="login" element={<Login />} />
           <Route path="signin" element={<SignIn />} />
